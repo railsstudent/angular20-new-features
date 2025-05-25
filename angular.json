@@ -1041,6 +1041,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": {
+              "base": "dist/rxresource-query-pokemon-demo",
+              "browser": ""
+            },
             "index": "projects/rxresource-query-pokemon-demo/src/index.html",
             "browser": "projects/rxresource-query-pokemon-demo/src/main.ts",
             "tsConfig": "projects/rxresource-query-pokemon-demo/tsconfig.app.json",
@@ -1068,7 +1072,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "https://railsstudent.github.io/angular20-new-features/rxresource-query-pokemon-demo/"
             },
             "development": {
               "optimization": false,
@@ -1120,6 +1125,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": {
+              "base": "dist/rxresource-stream-pokemon-demo",
+              "browser": ""
+            },
             "index": "projects/rxresource-stream-pokemon-demo/src/index.html",
             "browser": "projects/rxresource-stream-pokemon-demo/src/main.ts",
             "tsConfig": "projects/rxresource-stream-pokemon-demo/tsconfig.app.json",
@@ -1147,7 +1156,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "https://railsstudent.github.io/angular20-new-features/rxresource-stream-pokemon-demo/"
             },
             "development": {
               "optimization": false,
