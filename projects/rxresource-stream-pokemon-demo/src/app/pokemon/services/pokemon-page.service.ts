@@ -48,6 +48,7 @@ export class PokemonPageService {
         delay(800),
         reduce((acc, pokemon) => pokemon ? acc.concat(pokemon) : acc, 
         [] as Pokemon[]),
+      map((pokemons) => pokemons.sort((a, b) => a.id - b.id)),
       );
   }
 }
