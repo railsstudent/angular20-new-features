@@ -1030,6 +1030,164 @@
           }
         }
       }
+    },
+    "rxresourceQueryPokemonDemo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/rxresource-query-pokemon-demo",
+      "sourceRoot": "projects/rxresource-query-pokemon-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "index": "projects/rxresource-query-pokemon-demo/src/index.html",
+            "browser": "projects/rxresource-query-pokemon-demo/src/main.ts",
+            "tsConfig": "projects/rxresource-query-pokemon-demo/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/rxresource-query-pokemon-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/rxresource-query-pokemon-demo/src/styles.css"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "rxresourceQueryPokemonDemo:build:production"
+            },
+            "development": {
+              "buildTarget": "rxresourceQueryPokemonDemo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/rxresource-query-pokemon-demo/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/rxresource-query-pokemon-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/rxresource-query-pokemon-demo/src/styles.css"
+            ]
+          }
+        }
+      }
+    },
+    "rxresourceStreamPokemonDemo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/rxresource-stream-pokemon-demo",
+      "sourceRoot": "projects/rxresource-stream-pokemon-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "index": "projects/rxresource-stream-pokemon-demo/src/index.html",
+            "browser": "projects/rxresource-stream-pokemon-demo/src/main.ts",
+            "tsConfig": "projects/rxresource-stream-pokemon-demo/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/rxresource-stream-pokemon-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/rxresource-stream-pokemon-demo/src/styles.css"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "rxresourceStreamPokemonDemo:build:production"
+            },
+            "development": {
+              "buildTarget": "rxresourceStreamPokemonDemo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/rxresource-stream-pokemon-demo/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/rxresource-stream-pokemon-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/rxresource-stream-pokemon-demo/src/styles.css"
+            ]
+          }
+        }
+      }
     }
   },
   "schematics": {
