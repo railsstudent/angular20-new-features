@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, input, ResourceRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { rxResource, toObservable } from '@angular/core/rxjs-interop';
-import { scan, tap } from 'rxjs';
-import { PokemonRowComponent } from './pokemon-row.component';
+import { scan } from 'rxjs';
 import { Pokemon } from '../types/pokemon.type';
+import { PokemonRowComponent } from './pokemon-row.component';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -16,25 +16,21 @@ import { Pokemon } from '../types/pokemon.type';
       } @empty {
         <p>No Pokemon</p>
       }
-    }`,
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PokemonListComponent {
-  pokemonsResource = input.required<ResourceRef<Pokemon | undefined>>();
+  pokemons = input.required<Pokemon[]>();
 
-  pokemonPagination = computed(() => this.pokemonsResource().hasValue() ? 
-    this.pokemonsResource().value() : undefined
-  );
-
-  pokemonsPagination$ = toObservable(this.pokemonPagination)
+  pokemonsList$ = toObservable(this.pokemons)
     .pipe(
-      tap((p) => console.log('Pokemon:', p?.id)),
-      scan((acc, paginatedResult) => paginatedResult ? acc.concat(paginatedResult) : acc, 
+      scan((acc, newPokemons) => newPokemons ? acc.concat(newPokemons) : acc, 
       [] as Pokemon[]),
     );
 
   pokemonStreamResource = rxResource({
-    stream: () => this.pokemonsPagination$
+    stream: () => this.pokemonsList$
   });
 
   pokemonList = computed(() => this.pokemonStreamResource.hasValue() ? 

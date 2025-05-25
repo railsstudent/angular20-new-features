@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { PokemonPageUrlType } from '../types/pokemon-page.type';
 import { PokemonPageService } from '../services/pokemon-page.service';
+import { PokemonPageUrlType, PokemonUrl } from '../types/pokemon-page.type';
+import { Pokemon } from '../types/pokemon.type';
 import { PokemonListComponent } from './pokemon-list.component';
 
 @Component({
@@ -34,25 +35,30 @@ export class PokemonPageComponent {
   });
 
   value = computed(() => 
-    this.pokemonPageResource.hasValue() ? this.pokemonPageResource.value() : undefined
+    this.pokemonPageResource.hasValue() ? 
+      this.pokemonPageResource.value() : { results: [] as PokemonUrl[], next: '' }
   );
+
+  nextUrl = computed(() => this.value().next);
 
   concurrentPokemonsResource = rxResource({
     params: () => this.value(),
-    stream: ({ params }) => {
-      const urls = params.results.map((r) => r.url)
+    stream: ({ params }) => { 
+      const urls = params.results.map((r) => r.url);
       return this.pokemonPageService.concurrentPokemons(urls)
-    }
+    },
+    defaultValue: [] as Pokemon[]
   });
 
+  pokemons = computed(() => this.concurrentPokemonsResource.hasValue() ? 
+    this.concurrentPokemonsResource.value() : [] as Pokemon[]);
+  
   loadNext() {
-    if (this.url()) {
+    if (this.url()) { 
       this.url.set(this.nextUrl());
     } else {
       this.url.set('https://pokeapi.co/api/v2/pokemon?limit=5');
     }
   }
-
-  nextUrl = computed(() => this.value()?.next || '');
 }
 

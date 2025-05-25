@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { catchError, delay, from, map, mergeMap, Observable, of } from "rxjs";
+import { catchError, delay, from, map, mergeMap, Observable, of, reduce } from "rxjs";
 import { PokemonPageUrlType } from "../types/pokemon-page.type";
 import { Pokemon, PrePokemon } from "../types/pokemon.type";
 
@@ -37,12 +37,17 @@ export class PokemonPageService {
   }
 
   concurrentPokemons(urls: string[], concurrent=3) {
-    if (!urls || urls.length <=0) {
-      return of(undefined);
+    const pokemonList = [] as Pokemon[];
+
+    if (!urls || urls.length <= 0) {
+      return of(pokemonList);
     }
 
     return from(urls).pipe(
-      mergeMap((url) => this.retrievePokemonByUrl(url).pipe(delay(800)), concurrent),
-    );
+      mergeMap((url) => this.retrievePokemonByUrl(url), concurrent),
+        delay(800),
+        reduce((acc, pokemon) => pokemon ? acc.concat(pokemon) : acc, 
+        [] as Pokemon[]),
+      );
   }
 }

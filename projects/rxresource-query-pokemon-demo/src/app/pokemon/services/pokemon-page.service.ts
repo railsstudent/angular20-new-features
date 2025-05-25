@@ -33,9 +33,7 @@ export class PokemonPageService {
             )
         )
         return forkJoin(pokemons$).pipe(
-          map((pokemons) => 
-            pokemons.filter((pokemon) => !!pokemon)
-          ),
+          map((pokemons) => pokemons.filter((pokemon) => !!pokemon)),
           map((results) => ({ ...res, results }))
         )
       })

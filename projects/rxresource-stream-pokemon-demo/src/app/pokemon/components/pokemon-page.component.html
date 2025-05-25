@@ -1,9 +1,9 @@
 @if (pokemonPageResource.hasValue()) {
   @let pagination = pokemonPageResource.value();
-  <p>{{ `Count: ${pagination.count}` }} </p>
+  <p>{{ `Total Pokemons: ${pagination.count}` }} </p>
 }
 
-<app-pokemon-list [pokemonsResource]="concurrentPokemonsResource" />
+<app-pokemon-list [pokemons]="pokemons()" />
 
 <div class="load">
   <button (click)="loadNext()">Load More...</button>
