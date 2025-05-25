@@ -23,14 +23,14 @@ import { PokemonRowComponent } from './pokemon-row.component';
 export class PokemonListComponent {
   pokemons = input.required<Pokemon[]>();
 
-  pokemonsList$ = toObservable(this.pokemons)
+  pokemonList$ = toObservable(this.pokemons)
     .pipe(
       scan((acc, newPokemons) => newPokemons ? acc.concat(newPokemons) : acc, 
       [] as Pokemon[]),
     );
 
   pokemonStreamResource = rxResource({
-    stream: () => this.pokemonsList$
+    stream: () => this.pokemonList$
   });
 
   pokemonList = computed(() => this.pokemonStreamResource.hasValue() ? 
