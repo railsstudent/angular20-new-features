@@ -1,0 +1,21 @@
+@let result = pokemon();
+
+<p>{{ `ID: ${result.id}, name: ${result.name}, weight: ${result.weight}, height: ${result.height}` }}</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+  <div style="flex: 1 1 40%;">
+    <p>Types:</p>
+    <div style="display: flex; flex-wrap: wrap;">
+    @for (type of result.types; track type.slot) {
+      <div style="flex: 1 1 33.33%;">{{ type.name }}</div>
+    }
+    </div>
+  </div>
+  <div style="flex: 1 1 60%;">
+    <p>Stats:</p>
+    <div style="display: flex; flex-wrap: wrap;">
+    @for (stat of result.stats; track stat.name) {
+      <div style="flex: 1 1 33.33%;">{{ `${stat.name} - ${stat.base_stat}` }}</div>
+    }
+    </div>
+  </div>
+</div>

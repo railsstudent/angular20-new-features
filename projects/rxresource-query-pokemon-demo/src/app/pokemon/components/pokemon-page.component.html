@@ -1,0 +1,31 @@
+@let status = pokemonPageRef.status();
+@let isLoading = status === 'loading';
+@let isResolved = status === 'resolved';
+@let isReloading = status === 'reloading';
+
+<p>{{ `Status: ${status}` }}</p>
+<p>{{ `Is loading: ${isLoading}` }}</p>
+<p>{{ `Is reloading: ${isReloading}` }}</p>
+<p>{{ `Is resolved: ${isResolved}` }}</p>
+@if (pokemonPageRef.isLoading()) {
+  <p>Loading...</p>
+} @else if (pokemonPageRef.error()) {
+  <p>Error: {{ pokemonPageRef.error() }}</p>
+} @else if (pokemonPageRef.hasValue()) {
+  @let pagination = pokemonPageRef.value();
+  <p>{{ `Count: ${pagination.count}` }} </p>
+  @for (result of pagination.results; track result.id) {
+    <app-pokemon-row [result]="result" />
+    <hr />
+  }
+
+  <div style="display: flex; justify-content: space-around; align-items: center">
+  @if (prevUrl()) {
+    <button (click)="url.set(prevUrl())">Prev Page</button>
+  }
+  @if (nextUrl()) {
+    <button (click)="url.set(nextUrl())">Next Page</button>
+  }
+  <button (click)="this.pokemonPageRef.reload()">Reload</button>
+  </div>
+}
