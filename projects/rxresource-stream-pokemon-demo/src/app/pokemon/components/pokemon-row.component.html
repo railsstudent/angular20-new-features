@@ -1,0 +1,28 @@
+@let result = pokemon();
+@let id = result.id;
+@let name = result.name;
+@let weight = result.weight;
+@let height = result.height;
+
+<div class="wrap physical space_around">
+  <img [src]="result.url" />
+  <p>{{ `ID: ${id}, name: ${name}, weight: ${weight}, height: ${height}` }}</p>
+</div>
+<div class="wrap space_around">
+  <div style="flex: 1 1 40%;">
+    <p>Types:</p>
+    <div class="wrap">
+    @for (type of result.types; track type.slot) {
+      <div class="flex">{{ type.name }}</div>
+    }
+    </div>
+  </div>
+  <div style="flex: 1 1 60%;">
+    <p>Stats:</p>
+    <div class="wrap">
+    @for (stat of result.stats; track stat.name) {
+      <div class="flex">{{ `${stat.name} - ${stat.base_stat}` }}</div>
+    }
+    </div>
+  </div>
+</div>
