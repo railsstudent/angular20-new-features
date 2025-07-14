@@ -3,7 +3,8 @@ import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Person, PersonWithoutId } from './star-war.type';
 
-const URL = 'https://swapi.dev/api/people';
+// const URL = 'https://swapi.dev/api/people';
+const URL = 'https://swapi.info/api/people';
 
 export function getPerson() {
   const http = inject(HttpClient);
